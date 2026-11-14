@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+}
+
+:root {
+  --background: #0f1011;
+  --foreground: #f1f0e9;
+  --card: #151718;
+  --card-foreground: #f1f0e9;
+  --primary: #ff593e;
+  --primary-foreground: #170c09;
+  --secondary: #1c1e1f;
+  --secondary-foreground: #d9d9d3;
+  --muted: #292b2c;
+  --muted-foreground: #929694;
+  --border: #303334;
+  --ring: #ff806b;
+  --destructive: #ef4444;
+  --font-sans: "Segoe UI", Inter, system-ui, sans-serif;
+  --font-mono: "Cascadia Mono", Consolas, monospace;
+  --font-display: "Bahnschrift Condensed", "Arial Narrow", Impact, sans-serif;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 75% -15%, rgb(255 89 62 / 8%), transparent 35rem),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 1.25rem;
+  height: 1px;
+  content: "";
+  background: var(--primary);
+}
+
+.active-nav {
+  position: relative;
+}
+
+.active-nav::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  content: "";
+  background: var(--primary);
+}
+
+.live-dot {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 0 0.75rem rgb(255 89 62 / 65%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
