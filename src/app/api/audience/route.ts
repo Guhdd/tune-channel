@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 const DEFAULT_AUDIENCE_URL =
   "https://script.google.com/macros/s/AKfycbx3yTSlYYPBPUlka1j0NEuWhrUrLnLjL8WBGhbxl5Zy_IMiLjwle6aasLJjSjh7uPNB/exec";
-const REQUEST_TIMEOUT_MS = 8_000;
+const REQUEST_TIMEOUT_MS = 30_000;
 
 type AudienceEvent = {
   viewerId?: unknown;
@@ -18,7 +18,9 @@ export async function POST(request: Request) {
   }
 
   const viewerId = typeof event.viewerId === "string" ? event.viewerId.trim() : "";
-  const audienceEvent = event.event === "player" ? "player" : event.event === "visit" ? "visit" : "";
+  const audienceEvent = ["visit", "watch", "sound"].includes(String(event.event))
+    ? String(event.event)
+    : "";
 
   if (!/^[A-Za-z0-9-]{20,64}$/.test(viewerId) || !audienceEvent) {
     return Response.json({ status: "invalid" }, { status: 400 });

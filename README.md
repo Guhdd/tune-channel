@@ -1,22 +1,24 @@
 # TUNE Web TV
 
-Canal web contínuo cuja grade é administrada por uma planilha Google. O site lê o
-endpoint público do Apps Script no servidor, calcula a posição atual da transmissão
-e mantém todos os espectadores sincronizados.
+Rede web de canais contínuos administrada por uma planilha Google. O site mantém
+um único player e permite sintonizar `TUNE PLAY`, `TUNE WILD`, `TUNE CINEMA`,
+`TUNE ANIMES` e `TUNE CURTAS`. Cada canal possui grade e loop independentes.
 
 ## Administrar a grade
 
-Na primeira coluna da planilha TUNE, mantenha `link` na célula A1 e cole um link
-público do YouTube por linha a partir de A2. A coluna `título TUNE` aceita um nome
-curto opcional. A ordem das linhas define a transmissão, e o início informado em
-`D2` controla o horário-base usado pelo site. Início e término dos demais itens são
-calculados automaticamente. Links repetidos, inválidos, privados ou sem permissão
-para incorporação são ignorados pelo Apps Script.
+Cole um link público do YouTube por linha e escolha o canal na coluna `canal`.
+`título TUNE`, `selo` e `classificação` são opcionais. A ordem das linhas dentro de
+cada canal define sua transmissão; o painel lateral controla o horário-base usado
+por todas as grades. Início e término são calculados separadamente para cada canal.
+Links repetidos no mesmo canal, inválidos, privados ou sem permissão para
+incorporação são ignorados pelo Apps Script.
 
-O canal aguarda o primeiro horário configurado. Após iniciar, percorre a grade na
-ordem da planilha e volta ao primeiro item ao chegar ao fim. O mesmo marco inicial
-continua válido nos dias seguintes e só é substituído quando o horário da grade é
-editado.
+Os selos aceitos são `NOVO`, `RECOMENDADO`, `ESTREIA` e `EXCLUSIVO`. As
+classificações aceitas são `L`, `10`, `12`, `14`, `16` e `18`.
+
+Cada canal aguarda o horário configurado. Após iniciar, percorre sua própria grade
+e volta ao primeiro item ao chegar ao fim. O mesmo marco inicial continua válido
+nos dias seguintes e só é substituído quando o horário é editado.
 
 O Apps Script mantém os dados em cache por até cinco minutos. Enquanto a planilha
 estiver vazia ou indisponível, o site usa automaticamente a programação de
